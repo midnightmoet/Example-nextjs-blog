@@ -1,6 +1,18 @@
 import Head from 'next/head'
+import Link from 'next/link'
+import Date from '../components/date';
+import { getSortedPostsData } from '../lib/posts'
 
-export default function Home() {
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
+
+const Home = () => {
   return (
     <div className="container">
       <Head>
@@ -10,7 +22,7 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Read <Link href="/posts/first-post">this page</Link>
         </h1>
 
         <p className="description">
@@ -207,3 +219,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Home;
